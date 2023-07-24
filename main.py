@@ -11,6 +11,7 @@ import requests
 import json
 from mtranslate import translate
 from concurrent.futures import ThreadPoolExecutor
+import platform
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 
