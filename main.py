@@ -2,12 +2,9 @@
 import streamlit as st
 from langchain import PromptTemplate
 import pathlib
-
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+import os
 
 from langchain.chains import ConversationalRetrievalChain
-import pathlib
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
@@ -73,11 +70,14 @@ def get_chat_history(inputs) -> str:
     return "\n".join(res)
 
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+# Get the appropriate path type for your system
+if os.name == 'nt':  # Windows
+    path_type = pathlib.WindowsPath
+else:  # POSIX (Linux, macOS, etc.)
+    path_type = pathlib.PosixPath
 
 key = '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'
-DATA_STORE_DIR = "data_store"
+DATA_STORE_DIR = path_type("data_store")
 
 
 # Load the LangChain.
