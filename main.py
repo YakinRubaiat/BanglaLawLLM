@@ -83,7 +83,7 @@ def get_chat_history_list():
 
 
 def get_chain():
-    vector_store = FAISS.load_local(DATA_STORE_DIR,
+    vector_store = FAISS.load_local(str(DATA_STORE_DIR),
                                     OpenAIEmbeddings(openai_api_key=key))
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
