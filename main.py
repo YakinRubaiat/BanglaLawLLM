@@ -114,14 +114,14 @@ def get_chain():
     return chain
 
 
-chain = get_chain()
-chat_history = get_chat_history_list()
+# chain = get_chain()
+# chat_history = get_chat_history_list()
 
 st.header("Legal Assistant")
 
 
-def call_chain(user_input, chat_history):
-    return chain({"question": user_input, "chat_history": chat_history})
+# def call_chain(user_input, chat_history):
+#     return chain({"question": user_input, "chat_history": chat_history})
 
 
 def call_openai(user_input):
@@ -137,13 +137,13 @@ def main():
 
         if submitted and user_input:
             with ThreadPoolExecutor(max_workers=2) as executor:
-                future1 = executor.submit(call_chain, user_input, chat_history)
+                # future1 = executor.submit(call_chain, user_input, chat_history)
                 future2 = executor.submit(call_openai, user_input)
 
-                response = future1.result()
+                # response = future1.result()
                 result1 = future2.result()
 
-                output = f"Source Based answer: {response['answer']} \n\n chatGPT: {result1} \n"
+                output = f"Source Based answer:  \n\n chatGPT: {result1} \n"
                 st.write(output)
 
 
