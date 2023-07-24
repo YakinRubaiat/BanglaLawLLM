@@ -13,10 +13,6 @@ import pathlib
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
 
-
-import faiss
-
-
 import requests
 import json
 from mtranslate import translate
@@ -100,7 +96,7 @@ pathlib.PosixPath = pathlib.WindowsPath
 
 
 def get_chain():
-    vector_store = faiss.load_local(DATA_STORE_DIR,
+    vector_store = FAISS.load_local(DATA_STORE_DIR,
                                     OpenAIEmbeddings(openai_api_key=key))
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
