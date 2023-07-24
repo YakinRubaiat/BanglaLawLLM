@@ -11,13 +11,12 @@ import requests
 import json
 from mtranslate import translate
 from concurrent.futures import ThreadPoolExecutor
-import platform
 import pathlib
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 
-plt = platform.system()
-if plt == 'Windows': pathlib.PosixPath = pathlib.PurePosixPath
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
 key = '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'
 
 prompt_template = """Use the following pieces of context to answer the question at the end. \n 
