@@ -73,7 +73,7 @@ def get_chat_history(inputs) -> str:
 
 
 key = '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'
-DATA_STORE_DIR = "data_store"
+DATA_STORE_DIR = pathlib.Path("./data_store")
 
 
 # Load the LangChain.
@@ -84,7 +84,7 @@ def get_chat_history_list():
 
 
 def get_chain():
-    vector_store = FAISS.load_local(str(DATA_STORE_DIR),
+    vector_store = FAISS.load_local(DATA_STORE_DIR,
                                     OpenAIEmbeddings(openai_api_key=key))
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
