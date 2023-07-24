@@ -14,6 +14,9 @@ temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
 
 
+import faiss
+
+
 import requests
 import json
 from mtranslate import translate
@@ -81,7 +84,7 @@ def get_chat_history(inputs) -> str:
 
 
 key = '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'
-DATA_STORE_DIR = "./data_store"
+DATA_STORE_DIR = r"data_store"
 
 
 # Load the LangChain.
@@ -97,7 +100,7 @@ pathlib.PosixPath = pathlib.WindowsPath
 
 
 def get_chain():
-    vector_store = FAISS.load_local(DATA_STORE_DIR,
+    vector_store = faiss.load_local(DATA_STORE_DIR,
                                     OpenAIEmbeddings(openai_api_key=key))
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
