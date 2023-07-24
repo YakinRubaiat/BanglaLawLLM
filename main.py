@@ -1,7 +1,10 @@
 """Python file to serve as the frontend"""
 import streamlit as st
 from langchain import PromptTemplate
-import os
+import pathlib
+
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
 
 from pathlib import PosixPath
 from langchain.chains import ConversationalRetrievalChain
