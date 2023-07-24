@@ -3,7 +3,7 @@ import streamlit as st
 from langchain import PromptTemplate
 
 from langchain.chains import ConversationalRetrievalChain
-import pathlib
+import os
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
@@ -11,6 +11,8 @@ import requests
 import json
 from mtranslate import translate
 from concurrent.futures import ThreadPoolExecutor
+
+parent_dir = os.path.dirname(os.path.abspath(__file__))
 
 key = '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'
 
@@ -73,7 +75,7 @@ temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
 
 key = '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'
-DATA_STORE_DIR = "data_store"
+DATA_STORE_DIR = os.path.join(parent_dir, "data_store")
 
 
 # Load the LangChain.
