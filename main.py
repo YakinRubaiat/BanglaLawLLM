@@ -71,9 +71,6 @@ def get_chat_history(inputs) -> str:
     return "\n".join(res)
 
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-
 key = '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'
 DATA_STORE_DIR = os.path.join(parent_dir, "data_store")
 
