@@ -1,7 +1,6 @@
 """Python file to serve as the frontend"""
 import streamlit as st
 from langchain import PromptTemplate
-import pathlib
 import os
 
 from langchain.chains import ConversationalRetrievalChain
@@ -73,7 +72,7 @@ def get_chat_history(inputs) -> str:
 # Get the appropriate path type for your system
 
 key = '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'
-DATA_STORE_DIR = pathlib.Path("./data_store")
+DATA_STORE_DIR = os.path.join(".", "data_store")
 
 
 # Load the LangChain.
