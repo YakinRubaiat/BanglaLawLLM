@@ -1,5 +1,6 @@
 """Python file to serve as the frontend"""
-import os
+
+
 import streamlit as st
 from langchain import PromptTemplate
 
@@ -7,6 +8,12 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
+
+import pathlib
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
+
+
 import requests
 import json
 from mtranslate import translate
@@ -82,6 +89,11 @@ def get_chat_history_list():
     chat_history = []
 
     return chat_history
+
+
+import pathlib
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
 
 
 def get_chain():
