@@ -73,7 +73,7 @@ def get_chat_history(inputs) -> str:
 # Get the appropriate path type for your system
 
 key = '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'
-DATA_STORE_DIR = pathlib.Path("data_store")
+DATA_STORE_DIR = pathlib.Path("./data_store")
 
 
 # Load the LangChain.
