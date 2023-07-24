@@ -20,7 +20,9 @@ from concurrent.futures import ThreadPoolExecutor
 import pathlib
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
+import os
 
+parent_dir = os.path.dirname(os.path.abspath(__file__))
 
 key = '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'
 
@@ -96,7 +98,7 @@ pathlib.PosixPath = pathlib.WindowsPath
 
 
 def get_chain():
-    vector_store = FAISS.load_local(r"./data_store",
+    vector_store = FAISS.load_local(os.path.join(parent_dir, "data_store"),
                                     OpenAIEmbeddings(openai_api_key=key))
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
