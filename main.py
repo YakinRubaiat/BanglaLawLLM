@@ -12,11 +12,14 @@ import json
 from mtranslate import translate
 from concurrent.futures import ThreadPoolExecutor
 import pathlib
+import platform
 
-parent_dir = os.path.dirname(os.path.abspath(__file__))
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+import pathlib
+plt = platform.system()
+if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
+
+
 key = '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'
 
 prompt_template = """Use the following pieces of context to answer the question at the end. \n 
@@ -48,7 +51,7 @@ def CallOpenAI(question):
         "Bearer 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",
     }
     data = {
-        "model": "gpt-3.5-turbo",
+        "model": "gpt-4",
         "messages": [{
             "role": "user",
             "content": message
