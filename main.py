@@ -3,6 +3,7 @@ import streamlit as st
 from langchain import PromptTemplate
 import os
 
+from pathlib import PosixPath
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -72,7 +73,7 @@ def get_chat_history(inputs) -> str:
 # Get the appropriate path type for your system
 
 key = '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'
-DATA_STORE_DIR = os.path.join(".", "data_store")
+DATA_STORE_DIR = PosixPath("data_store")
 
 
 # Load the LangChain.
