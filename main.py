@@ -87,7 +87,7 @@ def get_chat_history_list():
     return chat_history
 
 
-@st.cache(allow_output_mutation=True, show_spinner=False, caching="clear_cache")
+@st.cache(allow_output_mutation=True, show_spinner=False)
 def get_chain():
     vector_store = FAISS.load_local(DATA_STORE_DIR,
                                     OpenAIEmbeddings(openai_api_key=key))
