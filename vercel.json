@@ -8,5 +8,9 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/main.py" }   // Replace with your app filename
-  ]
+  ],
+  "install": {
+    "include": ["requirements.txt"],   // Specifies the files required for installation
+    "command": "pip install -r requirements.txt"   // The command to install Python dependencies
+  }
 }
