@@ -1,13 +1,9 @@
 """Python file to serve as the frontend"""
 import streamlit as st
 from langchain import PromptTemplate
-import pathlib
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-
-from pathlib import PosixPath
 from langchain.chains import ConversationalRetrievalChain
+import pathlib
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
@@ -73,10 +69,11 @@ def get_chat_history(inputs) -> str:
     return "\n".join(res)
 
 
-# Get the appropriate path type for your system
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
 
 key = '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'
-DATA_STORE_DIR = PosixPath("data_store")
+DATA_STORE_DIR = "data_store"
 
 
 # Load the LangChain.
@@ -87,7 +84,7 @@ def get_chat_history_list():
 
 
 def get_chain():
-    vector_store = FAISS.load_local(str(DATA_STORE_DIR),
+    vector_store = FAISS.load_local(DATA_STORE_DIR,
                                     OpenAIEmbeddings(openai_api_key=key))
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
