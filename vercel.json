@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.py",   // Replace with your Streamlit app filename
+      "use": "@vercel/python"      // Use the Vercel Python runtime
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/main.py" }   // Replace with your app filename
+  ]
+}
