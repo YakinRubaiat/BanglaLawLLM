@@ -154,7 +154,7 @@ def main():
                 response = future1.result()
                 result1 = future2.result()
 
-                output = f"Source Based answer:  {response}\n\n chatGPT: {result1} \n"
+                output = f"Source Based answer:  {response['answer']}\n\n chatGPT: {result1} \n"
                 st.write(output)
 
 
