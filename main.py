@@ -1,6 +1,7 @@
 """Python file to serve as the frontend"""
 
 
+import pickle
 import streamlit as st
 from langchain import PromptTemplate
 
@@ -17,10 +18,8 @@ import requests
 import json
 from mtranslate import translate
 from concurrent.futures import ThreadPoolExecutor
-import pathlib
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
 import os
+import faiss
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -92,14 +91,26 @@ def get_chat_history_list():
     return chat_history
 
 
-import pathlib
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+def load_local():
+    path = os.path.join(os.getcwd(), 'data_store', 'index.faiss')
+    index = faiss.read_index(path)
 
+    pkl_path = os.path.join(os.getcwd(), 'data_store', 'index.pkl')
+
+    with open(pkl_path, "rb") as f:
+        docstore, index_to_docstore_id = pickle.load(f)
+
+
+    return FAISS(
+        OpenAIEmbeddings(openai_api_key=key),
+        index,
+        docstore,
+        index_to_docstore_id
+    )
+    
 
 def get_chain():
-    vector_store = FAISS.load_local(os.path.join(parent_dir, "data_store"),
-                                    OpenAIEmbeddings(openai_api_key=key))
+    vector_store = load_local()
 
     llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=key)
 
@@ -114,14 +125,14 @@ def get_chain():
     return chain
 
 
-# chain = get_chain()
-# chat_history = get_chat_history_list()
+chain = get_chain()
+chat_history = get_chat_history_list()
 
 st.header("Legal Assistant")
 
 
-# def call_chain(user_input, chat_history):
-#     return chain({"question": user_input, "chat_history": chat_history})
+def call_chain(user_input, chat_history):
+    return chain({"question": user_input, "chat_history": chat_history})
 
 
 def call_openai(user_input):
@@ -137,10 +148,10 @@ def main():
 
         if submitted and user_input:
             with ThreadPoolExecutor(max_workers=2) as executor:
-                # future1 = executor.submit(call_chain, user_input, chat_history)
+                future1 = executor.submit(call_chain, user_input, chat_history)
                 future2 = executor.submit(call_openai, user_input)
 
-                # response = future1.result()
+                response = future1.result()
                 result1 = future2.result()
 
                 output = f"Source Based answer:  \n\n chatGPT: {result1} \n"
