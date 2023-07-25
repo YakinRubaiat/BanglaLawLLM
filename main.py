@@ -102,7 +102,7 @@ def load_local():
 
 
     return FAISS(
-        OpenAIEmbeddings(openai_api_key=key),
+        OpenAIEmbeddings(openai_api_key=key).embed_query,
         index,
         docstore,
         index_to_docstore_id
