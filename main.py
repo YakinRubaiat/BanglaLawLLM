@@ -23,7 +23,7 @@ import faiss
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 
-key = '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'
+key = ''
 
 prompt_template = """Use the following pieces of context to answer the question at the end. \n 
 act as a legal assistant how will help user for the question based on the context \n
